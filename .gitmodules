@@ -1,7 +1,7 @@
 [submodule "dependencies/repos/hptimelib"]
 	path = dependencies/repos/hptimelib
 	url = git@github.com:ralequi/hptimelib.git
-[submodule "dependencies/google-astyle"]
+[submodule "dependencies/repos/google-astyle"]
 	path = dependencies/repos/google-astyle
 	url = https://github.com/xuy/google-astyle
 [submodule "dependencies/repos/libressl"]
@@ -10,4 +10,3 @@
 [submodule "dependencies/repos/libressl-dep"]
 	path = dependencies/repos/libressl-dep
 	url = https://github.com/libressl-portable/openbsd.git
-
