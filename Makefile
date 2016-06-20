@@ -14,11 +14,31 @@ export SSLLDFLAGS= dependencies/compiled/libressl/usr/local/lib/libtls.a depende
 
 export LDFLAGS=-fPIC -ldl -lpthread -lstdc++
 
-clean:
-	rm -rf obj lib bin
-	cd $(JAVAPATH); rm -rf $(CLASSFILES)
-	./tools/cleanorigs.bash
-	cd dependencies; $(MAKE) $(MFLAGS) clean
-	git submodule foreach git clean -fdX
-	git clean -fdx
+export CPPINCLUDES := $(wildcard include/*.h include/*.hpp)
+export SRCS := $(wildcard src/*.c src/*.cpp)
 
+all: bin/handbeserver
+
+handbeserver: Dependencies $(SRCS) $(CPPINCLUDES)
+
+bin/handbeserver: handbeserver | $(SRCS)
+	mkdir -p bin
+	$(CXX) $(CXXFLAGS) $| $(SSLLDFLAGS) $(LDFLAGS) -o $@
+
+clean:
+	rm -rf bin
+
+Dependencies: dependencies/compiled/libressl
+
+dependencies/compiled:
+	git submodule update --init --recursive
+	mkdir -p dependencies/compiled
+
+export LIBSSLCFLAGS='-O3 -fPIC'
+export CURRDIR=$(shell pwd)
+dependencies/compiled/libressl: .gitmodules | dependencies/compiled
+	cd dependencies; ln -s ../libressl-dep repos/libressl/openbsd || true
+	cd dependencies/repos/libressl; ./autogen.sh
+	cd dependencies/repos/libressl; ./configure CFLAGS=$(LIBSSLCFLAGS)
+	cd dependencies/repos/libressl; $(MAKE) $(MFLAGS) install DESTDIR=$(CURRDIR)/dependencies/compiled/libressl
+	

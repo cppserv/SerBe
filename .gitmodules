@@ -10,3 +10,6 @@
 [submodule "dependencies/repos/libressl-dep"]
 	path = dependencies/repos/libressl-dep
 	url = https://github.com/libressl-portable/openbsd.git
+[submodule "dependencies/repos/netlib"]
+	path = dependencies/repos/netlib
+	url = git@repit.ii.uam.es:hilo/netlib.git
