@@ -2,88 +2,94 @@
 
 serverhttp::serverhttp(string ip, uint16_t port)
 {
-    this->ip = ip;
-    this->port = port;
+	this->ip = ip;
+	this->port = port;
 
-    this->listenfd = tcp_listen_on_port(port);
+	this->listenfd = tcp_listen_on_port(port);
 }
 
 void serverhttp::run()
 {
-    while(1)
-    {
-        SyncSocket * ss = tcp_upgrade2syncSocket(tcp_accept(this->listenfd,NULL),NOSSL,NULL);
-        this->process(ss);
-        tcp_sclose(ss);
-    }
+	while (1) {
+		SyncSocket *ss = tcp_upgrade2syncSocket(tcp_accept(this->listenfd, NULL), NOSSL, NULL);
+		this->process(ss);
+		tcp_sclose(ss);
+	}
 }
 
-void serverhttp::process(SyncSocket* fd)
+void serverhttp::process(SyncSocket *fd)
 {
-    string method ="";
-    string path ="";
+	string method = "";
+	string path = "";
 
-    char last = readChar(fd);
-    while(last!=' ')
-    {
-        method+=last;
-        last = readChar(fd);
-    }
+	char last = readChar(fd);
 
-    last = readChar(fd);
-    while(last!=' ')
-    {
-        path+=last;
-        last = readChar(fd);
-    }
-    while(last!='\n') last = readChar(fd);
+	while (last != ' ') {
+		method += last;
+		last = readChar(fd);
+	}
 
-    if(method == "get" || method =="GET")
-    {
-        this->methodGET(path,fd);
-    }
+	last = readChar(fd);
+
+	while (last != ' ') {
+		path += last;
+		last = readChar(fd);
+	}
+
+	while (last != '\n') {
+		last = readChar(fd);
+	}
+
+	if (method == "get" || method == "GET") {
+		this->methodGET(path, fd);
+	}
 
 }
 
-void serverhttp::methodGET(string path, SyncSocket* fd)
+void serverhttp::methodGET(string path, SyncSocket *fd)
 {
-    UNUSED(fd);
-    cout << "Path requested " << path << endl;
-    read2end(fd);
-    httpReply(fd,"HTTP/1.1",404,"Not found");
+	UNUSED(fd);
+	cout << "Path requested " << path << endl;
+	read2end(fd);
+	httpReply(fd, "HTTP/1.1", 404, "Not found");
 }
 
-char serverhttp::readChar(SyncSocket* fd)
+char serverhttp::readChar(SyncSocket *fd)
 {
-    char ret;
-    tcp_message_srecv(fd, &ret, 1, 1);
-    return ret;
+	char ret;
+	tcp_message_srecv(fd, &ret, 1, 1);
+	return ret;
 }
 
-string serverhttp::read2end(SyncSocket* fd)
+string serverhttp::read2end(SyncSocket *fd)
 {
-    ostringstream out;
-    
-    char tmp; int num=0;
-    while(num <2)
-    {
-        tmp=readChar(fd);
-        if(tmp=='\n')
-        num++;
-        else if(tmp!='\r')
-        num=0;
-        out << tmp;
-    }
+	ostringstream out;
 
-    return out.str();
+	char tmp;
+	int num = 0;
+
+	while (num < 2) {
+		tmp = readChar(fd);
+
+		if (tmp == '\n') {
+			num++;
+
+		} else if (tmp != '\r') {
+			num = 0;
+		}
+
+		out << tmp;
+	}
+
+	return out.str();
 }
 
 
-void serverhttp::httpReply(SyncSocket* fd,string version, int num, string msg)
+void serverhttp::httpReply(SyncSocket *fd, string version, int num, string msg)
 {
-    ostringstream out;
-    out << version << " " << num <<" " << msg <<"\r\n\r\n";
-    string str = out.str();
-    tcp_message_ssend(fd, str.c_str(), str.length());
+	ostringstream out;
+	out << version << " " << num << " " << msg << "\r\n\r\n";
+	string str = out.str();
+	tcp_message_ssend(fd, str.c_str(), str.length());
 
 }

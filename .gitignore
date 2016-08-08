@@ -31,3 +31,6 @@
 handbeserver
 bin
 .vscode
+
+compiled
+dependencies/compiled
