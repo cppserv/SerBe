@@ -30,5 +30,8 @@ matrix:
             - g++-6
       env: COMPILER=g++-6
 
+before_script:
+  - echo -e "Host repit.ii.uam.es\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+
 script:
 -  make
