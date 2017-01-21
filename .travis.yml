@@ -3,6 +3,8 @@ language: cpp
 dist: trusty
 sudo: required
 
+before_script: 'echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config'
+
 matrix:
   include:
     - compiler: gcc
@@ -29,9 +31,6 @@ matrix:
           packages:
             - g++-6
       env: COMPILER=g++-6
-
-before_script:
-  - echo -e "Host repit.ii.uam.es\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 
 script:
 -  make
