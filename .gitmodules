@@ -1,6 +1,6 @@
 [submodule "dependencies/repos/hptimelib"]
 	path = dependencies/repos/hptimelib
-	url = git@github.com:ralequi/hptimelib.git
+	url = https://github.com/ralequi/hptimelib.git
 [submodule "dependencies/repos/google-astyle"]
 	path = dependencies/repos/google-astyle
 	url = https://github.com/xuy/google-astyle
