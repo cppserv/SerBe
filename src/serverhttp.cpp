@@ -48,7 +48,6 @@ void serverhttp::process(SyncSocket *fd)
 
 void serverhttp::methodGET(string path, SyncSocket *fd)
 {
-	UNUSED(fd);
 	cout << "Path requested " << path << endl;
 	read2end(fd);
 	httpReply(fd, "HTTP/1.1", 404, "Not found");
