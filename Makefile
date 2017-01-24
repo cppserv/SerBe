@@ -4,7 +4,7 @@ export TMPDIR=/tmp/
 #C/C++
 export CC=gcc
 export CXX=g++
-export FLAGS=-fPIC -I include/ -I dependencies/repos/hptimelib/include -Wall -Wextra -g -lpthread -pthread -O3 -Werror
+export FLAGS=-fPIC -I include/ -I dependencies/repos/hptimelib/include -Wall -Wextra -g -lpthread -pthread -O3 -Werror -pipe -flto
 export SSLCFLAGS= -I dependencies/compiled/libressl/usr/local/include
 export CFLAGS=$(FLAGS) $(SSLCFLAGS) -std=gnu11
 export CXXFLAGS=$(FLAGS) $(SSLCFLAGS) -std=gnu++11
