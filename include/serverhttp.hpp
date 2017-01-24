@@ -3,6 +3,7 @@
 
 #include <common.hpp>
 #include <path.hpp>
+#include <httpReply.hpp>
 
 class serverhttp
 {
@@ -22,8 +23,6 @@ class serverhttp
 	char readChar(SyncSocket *fd); //reads a char
 	string read2end(SyncSocket *fd); //reads a char
 	void methodGET(string path, SyncSocket *fd); //reads a char
-
-	void httpReply(SyncSocket *fd, string version, int num, string msg);
 };
 
 #endif

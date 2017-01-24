@@ -82,13 +82,3 @@ string serverhttp::read2end(SyncSocket *fd)
 
 	return out.str();
 }
-
-
-void serverhttp::httpReply(SyncSocket *fd, string version, int num, string msg)
-{
-	ostringstream out;
-	out << version << " " << num << " " << msg << "\r\n\r\n";
-	string str = out.str();
-	tcp_message_ssend(fd, str.c_str(), str.length());
-
-}
