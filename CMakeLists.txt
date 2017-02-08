@@ -73,7 +73,7 @@ include(Config.cmake)
 #set(NO_COMPILE_EXECUTABLES ON)
 #include_directories(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/hptimelib)
 #include_directories(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/hptimelib/include)
-#add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/dependencies/hptimelib ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/hptimelib/build)
+add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/dependencies/hptimelib ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/hptimelib/build)
 #unset(NO_COMPILE_EXECUTABLES)
 
 #NETLIB
