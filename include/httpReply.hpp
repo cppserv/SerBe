@@ -3,17 +3,14 @@
 
 #include <common.hpp>
 
-class httpReply
-{
- public:
-	httpReply(SyncSocket *fd, string version, int num, string msg);
-	~httpReply();
+class httpReply {
+   public:
+	httpReply (SyncSocket *fd, string version, int num, string msg);
+	~httpReply ();
 
- protected:
- 
- private:
+   protected:
+   private:
 	SyncSocket *fd;
-
 };
 
 #endif

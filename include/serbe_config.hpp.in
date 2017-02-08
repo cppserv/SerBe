@@ -1,0 +1,15 @@
+#ifndef __SERBE_CONF__HPP__
+#define __SERBE_CONF__HPP__
+
+//Basic defines for processing other defines
+#define HBC_xstr(a) HBC_str(a)
+#define HBC_str(a) #a
+
+//The current version
+#define serbe_VERSION_trash @serbe_VERSION@
+#define serbe_VERSION HBC_xstr(serbe_VERSION_trash)
+
+//Is serbe debug on?
+#cmakedefine SERBE_DEBUG
+
+#endif

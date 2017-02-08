@@ -5,24 +5,23 @@
 #include <path.hpp>
 #include <httpReply.hpp>
 
-class serverhttp
-{
- public:
-	serverhttp(string ip, uint16_t port);
-	void run();
+class serverhttp {
+   public:
+	serverhttp (string ip, uint16_t port);
+	void run ();
 
- protected:
-	int listen(); //listen for a new connection
-	void process(SyncSocket *fd);  //Process HTTP request
+   protected:
+	int listen ();  // listen for a new connection
+	void process (SyncSocket *fd);  // Process HTTP request
 
- private:
+   private:
 	string ip;
 	uint16_t port;
 	int listenfd;
 
-	char readChar(SyncSocket *fd); //reads a char
-	string read2end(SyncSocket *fd); //reads a char
-	void methodGET(string path, SyncSocket *fd); //reads a char
+	char readChar (SyncSocket *fd);  // reads a char
+	string read2end (SyncSocket *fd);  // reads a char
+	void methodGET (string path, SyncSocket *fd);  // reads a char
 };
 
 #endif

@@ -28,8 +28,5 @@
 *.out
 *.app
 
-handbeserver
-bin
-
-compiled
-dependencies/compiled
+include/serbe_config.hpp
+build

@@ -1,15 +1,6 @@
 [submodule "dependencies/repos/hptimelib"]
-	path = dependencies/repos/hptimelib
+	path = dependencies/hptimelib
 	url = https://github.com/ralequi/hptimelib.git
-[submodule "dependencies/repos/google-astyle"]
-	path = dependencies/repos/google-astyle
-	url = https://github.com/xuy/google-astyle
-[submodule "dependencies/repos/libressl"]
-	path = dependencies/repos/libressl
-	url = https://github.com/libressl-portable/portable
-[submodule "dependencies/repos/libressl-dep"]
-	path = dependencies/repos/libressl-dep
-	url = https://github.com/libressl-portable/openbsd.git
 [submodule "dependencies/repos/netlib"]
-	path = dependencies/repos/netlib
+	path = dependencies/netlib
 	url = git@repit.ii.uam.es:hilo/netlib.git
