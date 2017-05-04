@@ -52,6 +52,7 @@ function(INSTALL)
     else()
     endif()
 endfunction()
+set(NO_REDEFINEFUNTIONS ON)
 
 #Import all .hpp
 file(GLOB serbe_INCLUDE
@@ -70,17 +71,16 @@ include(Config.cmake)
 # Dependencies
 
 #HPTL
-#set(NO_COMPILE_EXECUTABLES ON)
-#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/hptimelib)
-#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/hptimelib/include)
+set(NO_COMPILE_EXECUTABLES ON)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/hptimelib/include)
 add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/dependencies/hptimelib ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/hptimelib/build)
-#unset(NO_COMPILE_EXECUTABLES)
+unset(NO_COMPILE_EXECUTABLES)
 
 #NETLIB
-#set(NO_COMPILE_EXECUTABLES ON)
-#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/netlib)
-#add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/dependencies/netlib)
-#unset(NO_COMPILE_EXECUTABLES)
+set(NO_COMPILE_EXECUTABLES ON)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/netlib/include)
+add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/dependencies/netlib)
+unset(NO_COMPILE_EXECUTABLES)
 
 #Tests
 add_executable(serBe ${serbe_SRC} ${serbe_INCLUDE})
