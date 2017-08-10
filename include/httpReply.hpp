@@ -9,8 +9,8 @@ class httpReply {
 	httpReply (serbeSocket &fd, string version, int num, string msg);
 	~httpReply ();
 
-	addHeader (string &headers);
-	addContent (string &content);
+	void addHeader (string &headers);
+	void addContent (string &content);
 
    protected:
    private:

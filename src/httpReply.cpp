@@ -6,10 +6,10 @@ httpReply::httpReply (serbeSocket& fd, string version, int num, string msg) {
 	this->headers << version << " " << num << " " << msg << "\r\n";
 }
 
-httpReply::addHeader (string& header) {
+void httpReply::addHeader (string& header) {
 	this->header << header << "\r\n";
 }
-httpReply::addContent (string& content) {
+void httpReply::addContent (string& content) {
 	this->content << content;
 }
 

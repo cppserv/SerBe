@@ -1,10 +1,10 @@
 #include <serbeSocket.hpp>
 
-serbeSocket (SyncSocket *fd) {
+serbeSocket::serbeSocket (SyncSocket *fd) {
 	this->fd = fd;
 }
 
-~serbeSocket () {
+serbeSocket::~serbeSocket () {
 	tcp_sclose (fd);
 }
 
