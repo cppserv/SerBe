@@ -1,7 +1,7 @@
 #include <httpReply.hpp>
 
-httpReply::httpReply (serbeSocket& fd, string version, int num, string msg) {
-	this->fd = fd;
+httpReply::httpReply (unique_ptr<serbeSocket> sock, string version, int num, string msg) {
+	this->sock = sock;
 
 	this->headers << version << " " << num << " " << msg << "\r\n";
 }
@@ -18,8 +18,8 @@ httpReply::~httpReply () {
 	string content   = this->content.str ();
 	string separator = "\r\n";
 
-	fd.send (headers.c_str (), headers.length ());
-	// fd.send (separator.c_str (), separator.length ());
-	fd.send (content.c_str (), content.length ());
-	fd.send (separator.c_str (), separator.length ());
+	sock->send (headers.c_str (), headers.length ());
+	// sock->send (separator.c_str (), separator.length ());
+	sock->send (content.c_str (), content.length ());
+	sock->send (separator.c_str (), separator.length ());
 }

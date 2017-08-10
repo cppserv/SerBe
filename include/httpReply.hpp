@@ -6,7 +6,7 @@
 
 class httpReply {
    public:
-	httpReply (serbeSocket &fd, string version, int num, string msg);
+	httpReply (unique_ptr<serbeSocket> sock, string version, int num, string msg);
 	~httpReply ();
 
 	void addHeader (string &headers);
@@ -14,7 +14,7 @@ class httpReply {
 
    protected:
    private:
-	serbeSocket &fd;
+	unique_ptr<serbeSocket> &sock;
 	ostringstream headers;
 	ostringstream content;
 };
