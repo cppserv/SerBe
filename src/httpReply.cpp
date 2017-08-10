@@ -7,7 +7,7 @@ httpReply::httpReply (serbeSocket& fd, string version, int num, string msg) {
 }
 
 void httpReply::addHeader (string& header) {
-	this->header << header << "\r\n";
+	this->headers << header << "\r\n";
 }
 void httpReply::addContent (string& content) {
 	this->content << content;

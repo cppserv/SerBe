@@ -21,7 +21,7 @@ string serbeSocket::read2end () {
 	int num = 0;
 
 	while (num < 2) {
-		tmp = readChar (fd);
+		tmp = this->readChar ();
 
 		if (tmp == '\n') {
 			num++;
