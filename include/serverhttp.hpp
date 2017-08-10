@@ -2,8 +2,9 @@
 #define _SERVER_HTTP_HPP_
 
 #include <common.hpp>
-#include <path.hpp>
 #include <httpReply.hpp>
+#include <path.hpp>
+#include <serbeSocket.hpp>
 
 class serverhttp {
    public:
@@ -11,17 +12,15 @@ class serverhttp {
 	void run ();
 
    protected:
-	int listen ();  // listen for a new connection
-	void process (SyncSocket *fd);  // Process HTTP request
+	int listen ();                     // listen for a new connection
+	void process (serbeSocket &sock);  // Process HTTP request
 
    private:
 	string ip;
 	uint16_t port;
 	int listenfd;
 
-	char readChar (SyncSocket *fd);  // reads a char
-	string read2end (SyncSocket *fd);  // reads a char
-	void methodGET (string path, SyncSocket *fd);  // reads a char
+	void methodGET (string path, serbeSocket &sock);  // reads a char
 };
 
 #endif

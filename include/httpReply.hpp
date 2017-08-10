@@ -2,15 +2,21 @@
 #define _HTTPREQUEST_HPP_
 
 #include <common.hpp>
+#include <serbeSocket.hpp>
 
 class httpReply {
    public:
-	httpReply (SyncSocket *fd, string version, int num, string msg);
+	httpReply (serbeSocket &fd, string version, int num, string msg);
 	~httpReply ();
+
+	addHeader (string &headers);
+	addContent (string &content);
 
    protected:
    private:
-	SyncSocket *fd;
+	serbeSocket &fd;
+	ostringstream headers;
+	ostringstream content;
 };
 
 #endif

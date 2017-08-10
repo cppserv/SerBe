@@ -1,14 +1,25 @@
 #include <httpReply.hpp>
 
-httpReply::httpReply (SyncSocket *fd, string version, int num, string msg) {
+httpReply::httpReply (serbeSocket& fd, string version, int num, string msg) {
 	this->fd = fd;
 
-	ostringstream out;
-	out << version << " " << num << " " << msg << "\r\n\r\n";
-	string str = out.str ();
-	tcp_message_ssend (fd, str.c_str (), str.length ());
+	this->headers << version << " " << num << " " << msg << "\r\n";
+}
+
+httpReply::addHeader (string& header) {
+	this->header << header << "\r\n";
+}
+httpReply::addContent (string& content) {
+	this->content << content;
 }
 
 httpReply::~httpReply () {
-	// tcp_sclose(fd);
+	string headers   = this->headers.str ();
+	string content   = this->content.str ();
+	string separator = "\r\n";
+
+	fd.send (headers.c_str (), headers.length ());
+	// fd.send (separator.c_str (), separator.length ());
+	fd.send (content.c_str (), content.length ());
+	fd.send (separator.c_str (), separator.length ());
 }

@@ -14,8 +14,6 @@
 #include <mutex>
 #include <thread>
 
-#include <netlib.hpp>
-
 using namespace std;
 
 #endif
