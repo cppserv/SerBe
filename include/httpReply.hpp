@@ -14,7 +14,7 @@ class httpReply {
 
    protected:
    private:
-	unique_ptr<serbeSocket> &sock;
+	unique_ptr<serbeSocket> sock;
 	ostringstream headers;
 	ostringstream content;
 };

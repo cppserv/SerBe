@@ -14,6 +14,16 @@ char serbeSocket::readChar () {
 	return ret;
 }
 
+/** send
+ * Sends a full message to a socket
+ * @return 0 if OK, something else if error.
+ * ERROR CODES:
+ * -1 if socket is closed.
+ */
+int serbeSocket::send (const void *message, size_t len) {
+	return tcp_message_ssend (fd, message, len);
+}
+
 string serbeSocket::read2end () {
 	ostringstream out;
 

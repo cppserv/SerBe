@@ -46,6 +46,6 @@ void serverhttp::methodGET (string path, serbeSocket &sock) {
 	cout << "Path requested " << path << endl;
 	sock.read2end ();
 
-	unique_ptr<serbeSocket> psock = make_unique<serbeSocket> (sock);
+	unique_ptr<serbeSocket> psock = unique_ptr<serbeSocket> (&sock);
 	httpReply (move (psock), "HTTP/1.1", 404, "Not found");
 }

@@ -1,7 +1,7 @@
 #include <httpReply.hpp>
 
 httpReply::httpReply (unique_ptr<serbeSocket> sock, string version, int num, string msg) {
-	this->sock = sock;
+	this->sock = move(sock);
 
 	this->headers << version << " " << num << " " << msg << "\r\n";
 }
