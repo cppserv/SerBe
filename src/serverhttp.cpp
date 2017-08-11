@@ -9,32 +9,32 @@ serverhttp::serverhttp (string ip, uint16_t port) {
 
 void serverhttp::run () {
 	while (1) {
-		serbeSocket ss =
-		    serbeSocket (tcp_upgrade2syncSocket (tcp_accept (this->listenfd, NULL), NOSSL, NULL));
+		unique_ptr<serbeSocket> ss = unique_ptr<serbeSocket> (
+		    &serbeSocket (tcp_upgrade2syncSocket (tcp_accept (this->listenfd, NULL), NOSSL, NULL)));
 		this->process (ss);
 	}
 }
 
-void serverhttp::process (serbeSocket &sock) {
+void serverhttp::process (unique_ptr<serbeSocket> &sock) {
 	string method = "";
 	string path   = "";
 
-	char last = sock.readChar ();
+	char last = sock->readChar ();
 
 	while (last != ' ') {
 		method += last;
-		last = sock.readChar ();
+		last = sock->readChar ();
 	}
 
-	last = sock.readChar ();
+	last = sock->readChar ();
 
 	while (last != ' ') {
 		path += last;
-		last = sock.readChar ();
+		last = sock->readChar ();
 	}
 
 	while (last != '\n') {
-		last = sock.readChar ();
+		last = sock->readChar ();
 	}
 
 	if (method == "get" || method == "GET") {
@@ -42,10 +42,9 @@ void serverhttp::process (serbeSocket &sock) {
 	}
 }
 
-void serverhttp::methodGET (string path, serbeSocket &sock) {
+void serverhttp::methodGET (string path, unique_ptr<serbeSocket> &sock) {
 	cout << "Path requested " << path << endl;
-	sock.read2end ();
+	sock->read2end ();
 
-	unique_ptr<serbeSocket> psock = unique_ptr<serbeSocket> (&sock);
-	httpReply (move (psock), "HTTP/1.1", 404, "Not found");
+	httpReply (move (sock), "HTTP/1.1", 404, "Not found");
 }

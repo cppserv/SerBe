@@ -12,15 +12,15 @@ class serverhttp {
 	void run ();
 
    protected:
-	int listen ();                     // listen for a new connection
-	void process (serbeSocket &sock);  // Process HTTP request
+	int listen ();                                 // listen for a new connection
+	void process (unique_ptr<serbeSocket> &sock);  // Process HTTP request
 
    private:
 	string ip;
 	uint16_t port;
 	int listenfd;
 
-	void methodGET (string path, serbeSocket &sock);  // reads a char
+	void methodGET (string path, unique_ptr<serbeSocket> &sock);  // reads a char
 };
 
 #endif
