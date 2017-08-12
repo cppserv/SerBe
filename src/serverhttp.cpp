@@ -37,5 +37,5 @@ void serverhttp::methodGET (string path, unique_ptr<serbeSocket> &sock) {
 	cout << "Path requested " << path << endl;
 	sock->read2end ();
 
-	httpReply (move (sock), "HTTP/1.1", 404, "Not found");
+	httpReply (move (sock), "HTTP/1.0", 404, "Not found");
 }
