@@ -19,8 +19,6 @@ void serverhttp::process (unique_ptr<serbeSocket> &sock) {
 	string method = "";
 	string path   = "";
 
-	char last = sock->readChar ();
-
 	// get method
 	method = sock->readuntilskip (' ');
 
