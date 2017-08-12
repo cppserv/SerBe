@@ -21,23 +21,16 @@ void serverhttp::process (unique_ptr<serbeSocket> &sock) {
 
 	char last = sock->readChar ();
 
-	while (last != ' ') {
-		method += last;
-		last = sock->readChar ();
-	}
+	// get method
+	method = sock->readuntilskip (' ');
 
-	last = sock->readChar ();
+	// get path
+	path = sock->readuntilskip (' ');
 
-	while (last != ' ') {
-		path += last;
-		last = sock->readChar ();
-	}
+	// skip until newline
+	sock->readuntilskip ('\n');
 
-	while (last != '\n') {
-		last = sock->readChar ();
-	}
-
-	if (method == "get" || method == "GET") {
+	if (method == "GET" || method == "get") {
 		this->methodGET (path, sock);
 	}
 }

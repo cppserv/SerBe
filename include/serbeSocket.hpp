@@ -9,8 +9,11 @@ class serbeSocket {
 	serbeSocket (SyncSocket *fd);
 	~serbeSocket ();
 
-	char readChar ();    // reads a char
-	string read2end ();  // reads a char
+	char readChar ();               // reads a char
+	string readuntil (char until);  // reads until a specific char is found
+	string readuntilskip (
+	    char until);     // reads until a specific char is found. The character itself is skipped
+	string read2end ();  // reads a string until there is no more data (\n\r)
 
 	/** send
 	 * Sends a full message to a socket
