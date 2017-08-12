@@ -9,7 +9,7 @@ serbeSocket::~serbeSocket () {
 }
 
 char serbeSocket::readChar () {
-	char ret;
+	char ret = '\0';
 	tcp_message_srecv (fd, &ret, 1, 1);
 	return ret;
 }
@@ -28,12 +28,14 @@ string serbeSocket::read2end () {
 	ostringstream out;
 
 	char tmp;
-	int num = 0;
+	int num = 0, ret;
 
 	while (num < 2) {
-		tmp = this->readChar ();
+		ret = tcp_message_srecv (fd, &tmp, 1, 1);
 
-		if (tmp == '\n') {
+		if (ret == -1) {
+			break;
+		} else if (tmp == '\n') {
 			num++;
 
 		} else if (tmp != '\r') {
