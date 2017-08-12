@@ -1,6 +1,6 @@
-[submodule "dependencies/repos/hptimelib"]
+[submodule "dependencies/hptimelib"]
 	path = dependencies/hptimelib
 	url = https://github.com/ralequi/hptimelib.git
-[submodule "dependencies/repos/netlib"]
+[submodule "dependencies/netlib"]
 	path = dependencies/netlib
 	url = git@repit.ii.uam.es:hilo/netlib.git
