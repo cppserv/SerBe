@@ -9,8 +9,8 @@ serverhttp::serverhttp (string ip, uint16_t port) {
 
 void serverhttp::run () {
 	while (1) {
-		unique_ptr<serbeSocket> ss = unique_ptr<serbeSocket> (
-		    new serbeSocket (tcp_upgrade2syncSocket (tcp_accept (this->listenfd, NULL), NOSSL, NULL)));
+		unique_ptr<serbeSocket> ss = unique_ptr<serbeSocket> (new serbeSocket (
+		    tcp_upgrade2syncSocket (tcp_accept (this->listenfd, NULL), NOSSL, NULL)));
 		this->process (ss);
 	}
 }
