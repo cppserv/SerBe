@@ -15,9 +15,15 @@ void serverhttp::run () {
 	}
 }
 
+// this method is only for this function
+static constexpr unsigned int str2int (const char *str, int h = 0) {
+	return !str[h] ? 5381 : (str2int (str, h + 1) * 33) ^ str[h];
+}
+
 void serverhttp::process (unique_ptr<serbeSocket> &sock) {
-	string method = "";
-	string path   = "";
+	string method  = "";
+	string path    = "";
+	string payload = "";
 
 	// get method
 	method = sock->readuntilskip (' ');
@@ -26,16 +32,55 @@ void serverhttp::process (unique_ptr<serbeSocket> &sock) {
 	path = sock->readuntilskip (' ');
 
 	// skip until newline
-	sock->readuntilskip ('\n');
+	payload = sock->readuntilskip ('\n');
 
-	if (method == "GET" || method == "get") {
-		this->methodGET (path, sock);
+	// prepare httpRequest
+	httpMethod hmethod;
+
+	// this should be ordered by probability
+	switch (str2int (method)) {
+		case str2int ("GET"):
+		case str2int ("get"):
+			hmethod = httpMethod::get;
+			break;
+		case str2int ("POST"):
+		case str2int ("post"):
+			hmethod = httpMethod::post;
+			break;
+		case str2int ("OPTIONS"):
+		case str2int ("options"):
+			hmethod = httpMethod::options;
+			break;
+		case str2int ("PUT"):
+		case str2int ("put"):
+			hmethod = httpMethod::put;
+			break;
+		case str2int ("DELETE"):
+		case str2int ("delete"):
+			hmethod = httpMethod::delete;
+			break;
+		case str2int ("HEAD"):
+		case str2int ("head"):
+			hmethod = httpMethod::head;
+			break;
+		case str2int ("TRACE"):
+		case str2int ("trace"):
+			hmethod = httpMethod::trace;
+			break;
+		case str2int ("CONNECT"):
+		case str2int ("connect"):
+			hmethod = httpMethod::connect;
+			break;
+		default:
+			// Just break
+			hmethod = httpMethod::invalid;
+			return;
 	}
-}
 
-void serverhttp::methodGET (string path, unique_ptr<serbeSocket> &sock) {
-	cout << "Path requested " << path << endl;
-	sock->read2end ();
+	// prepare httpdata
+	httpRequest hreq = httpRequest (method, path, payload);
+	httpReply hrep   = httpReply (move (sock), "HTTP/1.0");
 
-	httpReply (move (sock), "HTTP/1.0", 404, "Not found");
+	// process it and generate a response
+	mainDomain.processPath (path, hreq, hrep);
 }

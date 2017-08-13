@@ -1,9 +1,9 @@
 #include <httpReply.hpp>
 
 httpReply::httpReply (unique_ptr<serbeSocket> sock, string version, int num, string msg) {
-	this->sock = move(sock);
-
-	this->headers << version << " " << num << " " << msg << "\r\n";
+	this->sock       = move (sock);
+	httpResponseCode = num;
+	httpResponseMsg  = msg;
 }
 
 void httpReply::addHeader (string& header) {
@@ -18,6 +18,11 @@ httpReply::~httpReply () {
 	string content   = this->content.str ();
 	string separator = "\r\n";
 
+	string httpIntro = version + " " + to_string (num) + " " + msg + separator;
+
+	// HTTP response intro
+	sock->send (httpIntro.c_str (), httpIntro.length ());
+	// Send the HTTP headers
 	sock->send (headers.c_str (), headers.length ());
 	// sock->send (separator.c_str (), separator.length ());
 	sock->send (content.c_str (), content.length ());

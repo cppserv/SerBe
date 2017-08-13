@@ -1,5 +1,5 @@
-#ifndef _SERBESOCKET_HPP_
-#define _SERBESOCKET_HPP_
+#ifndef _SERBE_SOCKET_HPP_
+#define _SERBE_SOCKET_HPP_
 
 #include <common.hpp>
 #include <netlib.hpp>
