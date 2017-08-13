@@ -6,11 +6,10 @@
 #include <httpRequest.hpp>
 #include <path.hpp>
 
-
 class httpDomain {
    public:
 	httpDomain (string domainName);
-	httpDomain () : httpDomain ("localhost");
+	httpDomain () : httpDomain ("localhost"){};
 	~httpDomain ();
 
 	// inline methods

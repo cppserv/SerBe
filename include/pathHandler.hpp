@@ -10,29 +10,29 @@ class pathHandler {
 	pathHandler ();
 	~pathHandler ();
 
-	virtual void connect (httpRequest &request, httpReply &reply) {
+	virtual void methodConnect (httpRequest &request, httpReply &reply) {
 		this->get (request, reply);
 	}
-	virtual void delete (httpRequest &request, httpReply &reply) {
+	virtual void methodDelete (httpRequest &request, httpReply &reply) {
 		this->get (request, reply);
 	}
-	virtual void get (httpRequest &request, httpReply &reply) {
+	virtual void methodGet (httpRequest &request, httpReply &reply) {
 		(void)request;
 		(void)reply;
 	}
-	virtual void head (httpRequest &request, httpReply &reply) {
+	virtual void methodHead (httpRequest &request, httpReply &reply) {
 		this->get (request, reply);
 	}
-	virtual void options (httpRequest &request, httpReply &reply) {
+	virtual void methodOptions (httpRequest &request, httpReply &reply) {
 		this->get (request, reply);
 	}
-	virtual void post (httpRequest &request, httpReply &reply) {
+	virtual void methodPost (httpRequest &request, httpReply &reply) {
 		this->get (request, reply);
 	}
-	virtual void put (httpRequest &request, httpReply &reply) {
+	virtual void methodPut (httpRequest &request, httpReply &reply) {
 		this->get (request, reply);
 	}
-	virtual void trace (httpRequest &request, httpReply &reply) {
+	virtual void methodTrace (httpRequest &request, httpReply &reply) {
 		this->get (request, reply);
 	}
 

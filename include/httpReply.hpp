@@ -7,7 +7,8 @@
 class httpReply {
    public:
 	httpReply (unique_ptr<serbeSocket> sock, string version, int num, string msg);
-	httpReply (unique_ptr<serbeSocket> sock, string version) : httpReply (sock, version, 200, "OK");
+	httpReply (unique_ptr<serbeSocket> sock, string version)
+	    : httpReply (sock, version, 200, "OK"){};
 	~httpReply ();
 
 	void addHeader (string &headers);

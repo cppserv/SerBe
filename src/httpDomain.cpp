@@ -13,28 +13,28 @@ void httpDomain::processPath (path &ph, httpRequest &request, httpReply &reply) 
 		// Process the request
 		switch (request.getMethod ()) {
 			case httpMethod::GET:
-				search->getPathHandler ().get (request, reply);
+				*search.getPathHandler ().methodGet (request, reply);
 				break;
 			case httpMethod::POST:
-				search->getPathHandler ().post (request, reply);
+				*search.getPathHandler ().methodPost (request, reply);
 				break;
 			case httpMethod::OPTIONS:
-				search->getPathHandler ().options (request, reply);
+				*search.getPathHandler ().methodOptions (request, reply);
 				break;
 			case httpMethod::PUT:
-				search->getPathHandler ().put (request, reply);
+				*search.getPathHandler ().methodPut (request, reply);
 				break;
 			case httpMethod::DELETE:
-				search->getPathHandler ().delete(request, reply);
+				*search.getPathHandler ().methodDelete (request, reply);
 				break;
 			// case httpMethod::HEAD:
-			// 	search->getPathHandler ().head (request, reply);
+			// 	*search.getPathHandler ().methodHead (request, reply);
 			// 	break;
 			// case httpMethod::TRACE:
-			// 	search->getPathHandler ().trace (request, reply);
+			// 	*search.getPathHandler ().methodTrace (request, reply);
 			// 	break;
 			// case httpMethod::CONNECT:
-			// 	search->getPathHandler ().connect (request, reply);
+			// 	*search.getPathHandler ().methodConnect (request, reply);
 			// 	break;
 			default:
 				// wtf is that!?

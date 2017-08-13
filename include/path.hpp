@@ -11,35 +11,35 @@ class path {
 	~path ();
 
 	// inline methods
-	inline string getPath () {
+	inline string& getPath () {
 		return this->path;
 	}
 	inline void setPath (string path) {
 		this->path = path;
 	}
 
-	inline pathHandler getPathHandler () {
+	inline pathHandler& getPathHandler () {
 		return this->pathHandler;
 	}
 
 	// comparators
-	inline bool operator== (const path& lhs, const path& rhs) {
-		return lhs->path == rhs->path;
+	inline bool operator== (const path& rhs) {
+		return this->path == rhs->path;
 	}
-	inline bool operator!= (const path& lhs, const path& rhs) {
-		return lhs->path != rhs->path;
+	inline bool operator!= (const path& rhs) {
+		return this->path != rhs->path;
 	}
-	inline bool operator< (const path& lhs, const path& rhs) {
-		return lhs->path < rhs->path;
+	inline bool operator< (const path& rhs) {
+		return this->path < rhs->path;
 	}
-	inline bool operator> (const path& lhs, const path& rhs) {
-		return lhs->path > rhs->path;
+	inline bool operator> (const path& rhs) {
+		return this->path > rhs->path;
 	}
-	inline bool operator<= (const path& lhs, const path& rhs) {
-		return lhs->path <= rhs->path;
+	inline bool operator<= (const path& rhs) {
+		return this->path <= rhs->path;
 	}
-	inline bool operator>= (const path& lhs, const path& rhs) {
-		return lhs->path >= rhs->path;
+	inline bool operator>= (const path& rhs) {
+		return this->path >= rhs->path;
 	}
 
    protected:
