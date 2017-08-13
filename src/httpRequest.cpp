@@ -6,5 +6,5 @@ httpRequest::httpRequest (httpMethod method, string path, string httpPayload) {
 	this->httpPayload = httpPayload;
 }
 
-httpRequest::~httpReply () {
+httpRequest::~httpRequest () {
 }

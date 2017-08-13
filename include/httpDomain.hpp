@@ -24,7 +24,8 @@ class httpDomain {
 		availablePaths.insert (ph);
 	}
 	inline void processPath (string &sph, httpRequest &request, httpReply &reply) {
-		return this->processPath (httpPath (sph), request, reply);
+		httpPath hp = httpPath (sph);
+		this->processPath (hp, request, reply);
 	}
 	void processPath (httpPath &ph, httpRequest &request, httpReply &reply);
 

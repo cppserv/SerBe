@@ -38,7 +38,7 @@ void serverhttp::process (unique_ptr<serbeSocket> &sock) {
 	httpMethod hmethod;
 
 	// this should be ordered by probability
-	switch (str2int (method)) {
+	switch (str2int (method.c_str ())) {
 		case str2int ("GET"):
 		case str2int ("get"):
 			hmethod = httpMethod::GET;
@@ -78,7 +78,7 @@ void serverhttp::process (unique_ptr<serbeSocket> &sock) {
 	}
 
 	// prepare httpdata
-	httpRequest hreq = httpRequest (method, path, payload);
+	httpRequest hreq = httpRequest (hmethod, path, payload);
 	httpReply hrep   = httpReply (move (sock), "HTTP/1.0");
 
 	// process it and generate a response

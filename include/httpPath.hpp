@@ -19,26 +19,26 @@ class httpPath {
 	}
 
 	inline pathHandler& getPathHandler () {
-		return this->pathHandler;
+		return this->ph;
 	}
 
 	// comparators
-	inline const bool operator== (const httpPath& rhs) const {
+	inline const bool operator== (const httpPath& rhs) {
 		return this->pathString == rhs.pathString;
 	}
-	inline const bool operator!= (const httpPath& rhs) const {
+	inline const bool operator!= (const httpPath& rhs) {
 		return this->pathString != rhs.pathString;
 	}
-	inline const bool operator< (const httpPath& rhs) const {
+	inline const bool operator< (const httpPath& rhs) {
 		return this->pathString < rhs.pathString;
 	}
-	inline const bool operator> (const httpPath& rhs) const {
+	inline const bool operator> (const httpPath& rhs) {
 		return this->pathString > rhs.pathString;
 	}
-	inline const bool operator<= (const httpPath& rhs) const {
+	inline const bool operator<= (const httpPath& rhs) {
 		return this->pathString <= rhs.pathString;
 	}
-	inline const bool operator>= (const httpPath& rhs) const {
+	inline const bool operator>= (const httpPath& rhs) {
 		return this->pathString >= rhs.pathString;
 	}
 

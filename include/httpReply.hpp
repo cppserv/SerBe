@@ -33,6 +33,7 @@ class httpReply {
    protected:
    private:
 	unique_ptr<serbeSocket> sock;
+	string httpVersion;
 	int httpResponseCode;
 	string httpResponseMsg;
 	ostringstream headers;

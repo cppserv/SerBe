@@ -2,6 +2,7 @@
 
 httpReply::httpReply (unique_ptr<serbeSocket> sock, string version, int num, string msg) {
 	this->sock       = move (sock);
+	httpVersion      = version;
 	httpResponseCode = num;
 	httpResponseMsg  = msg;
 }
@@ -18,7 +19,8 @@ httpReply::~httpReply () {
 	string content   = this->content.str ();
 	string separator = "\r\n";
 
-	string httpIntro = version + " " + to_string (num) + " " + msg + separator;
+	string httpIntro =
+	    httpVersion + " " + to_string (httpResponseCode) + " " + httpResponseMsg + separator;
 
 	// HTTP response intro
 	sock->send (httpIntro.c_str (), httpIntro.length ());
