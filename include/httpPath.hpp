@@ -23,22 +23,22 @@ class httpPath {
 	}
 
 	// comparators
-	inline const bool operator== (const httpPath& rhs) {
+	inline bool operator== (const httpPath& rhs) const {
 		return this->pathString == rhs.pathString;
 	}
-	inline const bool operator!= (const httpPath& rhs) {
+	inline bool operator!= (const httpPath& rhs) const {
 		return this->pathString != rhs.pathString;
 	}
-	inline const bool operator< (const httpPath& rhs) {
+	inline bool operator< (const httpPath& rhs) const {
 		return this->pathString < rhs.pathString;
 	}
-	inline const bool operator> (const httpPath& rhs) {
+	inline bool operator> (const httpPath& rhs) const {
 		return this->pathString > rhs.pathString;
 	}
-	inline const bool operator<= (const httpPath& rhs) {
+	inline bool operator<= (const httpPath& rhs) const {
 		return this->pathString <= rhs.pathString;
 	}
-	inline const bool operator>= (const httpPath& rhs) {
+	inline bool operator>= (const httpPath& rhs) const {
 		return this->pathString >= rhs.pathString;
 	}
 
