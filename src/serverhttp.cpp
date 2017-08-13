@@ -41,39 +41,39 @@ void serverhttp::process (unique_ptr<serbeSocket> &sock) {
 	switch (str2int (method)) {
 		case str2int ("GET"):
 		case str2int ("get"):
-			hmethod = httpMethod::get;
+			hmethod = httpMethod::GET;
 			break;
 		case str2int ("POST"):
 		case str2int ("post"):
-			hmethod = httpMethod::post;
+			hmethod = httpMethod::POST;
 			break;
 		case str2int ("OPTIONS"):
 		case str2int ("options"):
-			hmethod = httpMethod::options;
+			hmethod = httpMethod::OPTIONS;
 			break;
 		case str2int ("PUT"):
 		case str2int ("put"):
-			hmethod = httpMethod::put;
+			hmethod = httpMethod::PUT;
 			break;
 		case str2int ("DELETE"):
 		case str2int ("delete"):
-			hmethod = httpMethod::delete;
+			hmethod = httpMethod::DELETE;
 			break;
 		case str2int ("HEAD"):
 		case str2int ("head"):
-			hmethod = httpMethod::head;
+			hmethod = httpMethod::HEAD;
 			break;
 		case str2int ("TRACE"):
 		case str2int ("trace"):
-			hmethod = httpMethod::trace;
+			hmethod = httpMethod::TRACE;
 			break;
 		case str2int ("CONNECT"):
 		case str2int ("connect"):
-			hmethod = httpMethod::connect;
+			hmethod = httpMethod::CONNECT;
 			break;
 		default:
 			// Just break
-			hmethod = httpMethod::invalid;
+			hmethod = httpMethod::INVALID;
 			return;
 	}
 

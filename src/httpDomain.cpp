@@ -12,28 +12,28 @@ void httpDomain::processPath (path &ph, httpRequest &request, httpReply &reply) 
 	if (search != availablePaths.end ()) {
 		// Process the request
 		switch (request.getMethod ()) {
-			case httpMethod::get:
+			case httpMethod::GET:
 				search->getPathHandler ().get (request, reply);
 				break;
-			case httpMethod::post:
+			case httpMethod::POST:
 				search->getPathHandler ().post (request, reply);
 				break;
-			case httpMethod::options:
+			case httpMethod::OPTIONS:
 				search->getPathHandler ().options (request, reply);
 				break;
-			case httpMethod::put:
+			case httpMethod::PUT:
 				search->getPathHandler ().put (request, reply);
 				break;
-			case httpMethod::delete:
+			case httpMethod::DELETE:
 				search->getPathHandler ().delete(request, reply);
 				break;
-			// case httpMethod::head:
+			// case httpMethod::HEAD:
 			// 	search->getPathHandler ().head (request, reply);
 			// 	break;
-			// case httpMethod::trace:
+			// case httpMethod::TRACE:
 			// 	search->getPathHandler ().trace (request, reply);
 			// 	break;
-			// case httpMethod::connect:
+			// case httpMethod::CONNECT:
 			// 	search->getPathHandler ().connect (request, reply);
 			// 	break;
 			default:
