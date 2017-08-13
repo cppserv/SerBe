@@ -6,7 +6,7 @@ httpDomain::httpDomain (string domainName) {
 httpDomain::~httpDomain () {
 }
 
-void httpDomain::processPath (path &ph, httpRequest &request, httpReply &reply) {
+void httpDomain::processPath (httpPath &ph, httpRequest &request, httpReply &reply) {
 	// lets find a path handler
 	auto search = availablePaths.find (ph);
 	if (search != availablePaths.end ()) {

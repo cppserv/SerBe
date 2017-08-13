@@ -2,9 +2,9 @@
 #define _HTTP_DOMAIN_HPP_
 
 #include <common.hpp>
+#include <httpPath.hpp>
 #include <httpReply.hpp>
 #include <httpRequest.hpp>
-#include <path.hpp>
 
 class httpDomain {
    public:
@@ -20,18 +20,18 @@ class httpDomain {
 		this->domainName = domainName;
 	}
 
-	inline void addPath (path &ph) {
+	inline void addPath (httpPath &ph) {
 		availablePaths.insert (ph);
 	}
 	inline void processPath (string &sph, httpRequest &request, httpReply &reply) {
-		return this->processPath (path (sph), request, reply);
+		return this->processPath (httpPath (sph), request, reply);
 	}
-	void processPath (path &ph, httpRequest &request, httpReply &reply);
+	void processPath (httpPath &ph, httpRequest &request, httpReply &reply);
 
    protected:
    private:
 	string domainName;
-	set<path> availablePaths;
+	set<httpPath> availablePaths;
 };
 
 #endif

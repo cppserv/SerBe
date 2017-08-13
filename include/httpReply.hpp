@@ -8,7 +8,7 @@ class httpReply {
    public:
 	httpReply (unique_ptr<serbeSocket> sock, string version, int num, string msg);
 	httpReply (unique_ptr<serbeSocket> sock, string version)
-	    : httpReply (sock, version, 200, "OK"){};
+	    : httpReply (move (sock), version, 200, "OK"){};
 	~httpReply ();
 
 	void addHeader (string &headers);
@@ -23,10 +23,10 @@ class httpReply {
 		return httpResponseMsg;
 	}
 
-	inline int setHttpResponseCode (int httpResponseCode) {
+	inline void setHttpResponseCode (int httpResponseCode) {
 		this->httpResponseCode = httpResponseCode;
 	}
-	inline string setHttpResponseMsg (string httpResponseMsg) {
+	inline void setHttpResponseMsg (string httpResponseMsg) {
 		this->httpResponseMsg = httpResponseMsg;
 	}
 

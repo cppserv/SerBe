@@ -3,10 +3,11 @@
 
 #include <common.hpp>
 #include <httpDomain.hpp>
+#include <httpPath.hpp>
 #include <httpReply.hpp>
 #include <httpRequest.hpp>
-#include <path.hpp>
 #include <serbeSocket.hpp>
+
 
 class serverhttp {
    public:
