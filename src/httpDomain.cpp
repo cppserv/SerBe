@@ -10,31 +10,32 @@ void httpDomain::processPath (httpPath &ph, httpRequest &request, httpReply &rep
 	// lets find a path handler
 	auto search = availablePaths.find (ph);
 	if (search != availablePaths.end ()) {
+		auto foundPath = (*search);
 		// Process the request
 		switch (request.getMethod ()) {
 			case httpMethod::GET:
-				(*search).getPathHandler ().methodGet (request, reply);
+				foundPath.getPathHandler ().methodGet (request, reply);
 				break;
 			case httpMethod::POST:
-				(*search).getPathHandler ().methodPost (request, reply);
+				foundPath.getPathHandler ().methodPost (request, reply);
 				break;
 			case httpMethod::OPTIONS:
-				(*search).getPathHandler ().methodOptions (request, reply);
+				foundPath.getPathHandler ().methodOptions (request, reply);
 				break;
 			case httpMethod::PUT:
-				(*search).getPathHandler ().methodPut (request, reply);
+				foundPath.getPathHandler ().methodPut (request, reply);
 				break;
 			case httpMethod::DELETE:
-				(*search).getPathHandler ().methodDelete (request, reply);
+				foundPath.getPathHandler ().methodDelete (request, reply);
 				break;
 			// case httpMethod::HEAD:
-			// 	(*search).getPathHandler ().methodHead (request, reply);
+			// 	foundPath.getPathHandler ().methodHead (request, reply);
 			// 	break;
 			// case httpMethod::TRACE:
-			// 	(*search).getPathHandler ().methodTrace (request, reply);
+			// 	foundPath.getPathHandler ().methodTrace (request, reply);
 			// 	break;
 			// case httpMethod::CONNECT:
-			// 	(*search).getPathHandler ().methodConnect (request, reply);
+			// 	foundPath.getPathHandler ().methodConnect (request, reply);
 			// 	break;
 			default:
 				// wtf is that!?

@@ -6,6 +6,12 @@ httpReply::httpReply (unique_ptr<serbeSocket> sock, string version, int num, str
 	httpResponseCode = num;
 	httpResponseMsg  = msg;
 }
+httpReply::httpReply (unique_ptr<serbeSocket> sock, string version) {
+	this->sock       = move (sock);
+	httpVersion      = version;
+	httpResponseCode = 200;
+	httpResponseMsg  = "OK";
+}
 
 void httpReply::addHeader (string& header) {
 	this->headers << header << "\r\n";
