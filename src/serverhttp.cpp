@@ -90,8 +90,8 @@ void serverhttp::process (unique_ptr<serbeSocket> &sock) {
 	httpReply *hrep   = new httpReply (move (sock), "HTTP/1.0");
 
 	// process it and generate a response
-	cout << "Requested path: " << path;
 	mainDomain.processPath (path, *hreq, *hrep);
+	cout << path;
 
 	// delete the http objects
 	delete hreq;

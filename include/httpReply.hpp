@@ -12,6 +12,7 @@ class httpReply {
 
 	void addHeader (string &headers);
 	void addContent (string &content);
+	void addContent (const char *content, unsigned long size);
 
 	// inline methods
 

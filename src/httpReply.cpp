@@ -20,6 +20,9 @@ void httpReply::addHeader (string& header) {
 void httpReply::addContent (string& content) {
 	this->content << content;
 }
+void httpReply::addContent (const char* content, unsigned long size) {
+	this->content.write (content, size);
+}
 
 httpReply::~httpReply () {
 	string headers   = this->headers.str ();
