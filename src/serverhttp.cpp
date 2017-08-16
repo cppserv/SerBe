@@ -79,8 +79,10 @@ void serverhttp::process (unique_ptr<serbeSocket> &sock) {
 
 	// prepare httpdata
 	httpRequest hreq = httpRequest (hmethod, path, payload);
-	httpReply hrep   = httpReply (move (sock), "HTTP/1.0");
+	httpReply *hrep  = new httpReply (move (sock), "HTTP/1.0");
 
 	// process it and generate a response
-	mainDomain.processPath (path, hreq, hrep);
+	cout << "Requested path: " << path << endl;
+	mainDomain.processPath (path, hreq, *hrep);
+	delete hrep;
 }

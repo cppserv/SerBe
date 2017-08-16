@@ -14,7 +14,8 @@ httpReply::httpReply (unique_ptr<serbeSocket> sock, string version) {
 }
 
 void httpReply::addHeader (string& header) {
-	this->headers << header << "\r\n";
+	if (!header.empty ())
+		this->headers << header << "\r\n";
 }
 void httpReply::addContent (string& content) {
 	this->content << content;
@@ -32,7 +33,7 @@ httpReply::~httpReply () {
 	sock->send (httpIntro.c_str (), httpIntro.length ());
 	// Send the HTTP headers
 	sock->send (headers.c_str (), headers.length ());
-	// sock->send (separator.c_str (), separator.length ());
+	sock->send (separator.c_str (), separator.length ());
 	sock->send (content.c_str (), content.length ());
 	sock->send (separator.c_str (), separator.length ());
 }

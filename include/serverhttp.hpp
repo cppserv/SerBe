@@ -8,7 +8,6 @@
 #include <httpRequest.hpp>
 #include <serbeSocket.hpp>
 
-
 class serverhttp {
    public:
 	serverhttp (string ip, uint16_t port);

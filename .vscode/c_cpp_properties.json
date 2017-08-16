@@ -26,8 +26,12 @@
             "includePath": [
                 "/usr/include",
                 "/usr/local/include",
+                "/usr/lib64/gcc/x86_64-pc-linux-gnu/5.4.0/include/g++-v5/",
+                "/usr/lib64/gcc/x86_64-pc-linux-gnu/5.4.0/include/",
+                "/usr/lib64/gcc/x86_64-pc-linux-gnu/5.4.0/include/g++-v5/x86_64-pc-linux-gnu/",
                 "${workspaceRoot}",
-                "${workspaceRoot}/include"
+                "${workspaceRoot}/include",
+                "${workspaceRoot}/dependencies/netlib/include"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",
