@@ -1,3 +1,5 @@
+#include <ctime>
+#include <iomanip>
 #include <serverhttp.hpp>
 
 serverhttp::serverhttp (string ip, uint16_t port) {
@@ -11,7 +13,12 @@ void serverhttp::run () {
 	while (1) {
 		unique_ptr<serbeSocket> ss = unique_ptr<serbeSocket> (new serbeSocket (
 		    tcp_upgrade2syncSocket (tcp_accept (this->listenfd, NULL), NOSSL, NULL)));
+
+		clock_t c_start = clock ();
 		this->process (ss);
+		clock_t c_end = clock ();
+		cout << fixed << setprecision (2)
+		     << " (took: " << 1000.0 * (c_end - c_start) / CLOCKS_PER_SEC << " ms)" << endl;
 	}
 }
 
@@ -82,7 +89,7 @@ void serverhttp::process (unique_ptr<serbeSocket> &sock) {
 	httpReply *hrep   = new httpReply (move (sock), "HTTP/1.0");
 
 	// process it and generate a response
-	cout << "Requested path: " << path << endl;
+	cout << "Requested path: " << path;
 	mainDomain.processPath (path, *hreq, *hrep);
 
 	// delete the http objects
