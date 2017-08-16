@@ -1,4 +1,4 @@
-#include <ctime>
+#include <chrono>
 #include <iomanip>
 #include <serverhttp.hpp>
 
@@ -14,11 +14,12 @@ void serverhttp::run () {
 		unique_ptr<serbeSocket> ss = unique_ptr<serbeSocket> (new serbeSocket (
 		    tcp_upgrade2syncSocket (tcp_accept (this->listenfd, NULL), NOSSL, NULL)));
 
-		clock_t c_start = clock ();
+		chrono::high_resolution_clock::time_point t1 = chrono::high_resolution_clock::now ();
 		this->process (ss);
-		clock_t c_end = clock ();
-		cout << fixed << setprecision (2)
-		     << " (took: " << 1000.0 * (c_end - c_start) / CLOCKS_PER_SEC << " ms)" << endl;
+		chrono::high_resolution_clock::time_point t2 = chrono::high_resolution_clock::now ();
+		auto duration = chrono::duration_cast<chrono::microseconds> (t2 - t1).count ();
+
+		cout << " (took: " << duration << " us)" << endl;
 	}
 }
 
