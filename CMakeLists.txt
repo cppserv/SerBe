@@ -88,6 +88,7 @@ add_executable(serBe ${serbe_SRC} ${serbe_INCLUDE})
 
 #Link library executables
 target_link_libraries(serBe netlib hptl)
+target_link_libraries(serBe magic) # For mime types
 
 #Library wall messages
 set_target_properties(serBe PROPERTIES COMPILE_FLAGS "${WARNINGFLAGS}")
