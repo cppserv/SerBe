@@ -6,7 +6,12 @@ serverhttp::serverhttp (string ip, uint16_t port) {
 	this->ip   = ip;
 	this->port = port;
 
-	this->listenfd = tcp_listen_on_port (port);
+	this->listenfd   = tcp_listen_on_port (port);
+	this->mainDomain = shared_ptr<httpDomain> (new httpDomain ());
+}
+serverhttp::~serverhttp () {
+	if (this->th.joinable ())  // wait for the main thread
+		this->th.join ();
 }
 
 void serverhttp::run () {
@@ -21,6 +26,15 @@ void serverhttp::run () {
 
 		cout << " (took: " << duration << " us)" << endl;
 	}
+}
+
+static void auxiliarServerRun (serverhttp *server) {
+	server->run ();
+}
+void serverhttp::runThreaded () {
+	if (this->th.joinable ())  // wait for the main thread, if already executed
+		this->th.join ();
+	this->th = thread (auxiliarServerRun, this);
 }
 
 // this method is only for this function
@@ -98,8 +112,8 @@ void serverhttp::process (unique_ptr<serbeSocket> &sock) {
 	httpReply *hrep   = new httpReply (move (sock), "HTTP/1.0");
 
 	// process it and generate a response
-	mainDomain.processPath (path, *hreq, *hrep);
-	cout << path;
+	mainDomain->processPath (path, *hreq, *hrep);
+	cout << path << " " << hrep->getHttpResponseMsg ();
 
 	// delete the http objects
 	delete hreq;

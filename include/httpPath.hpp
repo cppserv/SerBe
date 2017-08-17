@@ -6,7 +6,7 @@
 
 class httpPath {
    public:
-	httpPath (string pathString, pathHandler* ph);
+	httpPath (string pathString, shared_ptr<pathHandler>& ph);
 	httpPath (string pathString);
 	~httpPath ();
 
@@ -18,7 +18,7 @@ class httpPath {
 		this->pathString = pathString;
 	}
 
-	inline pathHandler* getPathHandler () {
+	inline shared_ptr<pathHandler> getPathHandler () {
 		return this->ph;
 	}
 
@@ -45,7 +45,7 @@ class httpPath {
    protected:
    private:
 	string pathString;
-	pathHandler* ph;
+	shared_ptr<pathHandler> ph;
 };
 
 #endif

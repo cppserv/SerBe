@@ -38,6 +38,6 @@ httpReply::~httpReply () {
 	sock->send (headers.c_str (), headers.length ());
 	// sock->send (separator.c_str (), separator.length ());
 	sock->send (content.c_str (), content.length ());
-	if (content.length ())  // only add one more separator if there are some content
-		sock->send (separator.c_str (), separator.length ());
+	// if (content.length ())  // only add one more separator if there are some content
+	//	sock->send (separator.c_str (), separator.length ());
 }

@@ -44,7 +44,6 @@ void httpDomain::processPath (httpPath &ph, httpRequest &request, httpReply &rep
 		}
 
 	} else {
-		cout << "404" << endl;
 		// no path handler found. Return 404 error.
 		reply.setHttpResponseCode (404);
 		reply.setHttpResponseMsg ("Not found");

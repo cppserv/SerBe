@@ -11,10 +11,12 @@
 class serverhttp {
    public:
 	serverhttp (string ip, uint16_t port);
+	~serverhttp ();
 	void run ();
+	void runThreaded ();
 
 	// expose domains
-	httpDomain mainDomain;
+	shared_ptr<httpDomain> mainDomain;
 
    protected:
 	int listen ();                                 // listen for a new connection
@@ -24,6 +26,7 @@ class serverhttp {
 	string ip;
 	uint16_t port;
 	int listenfd;
+	thread th;
 };
 
 #endif
