@@ -14,39 +14,30 @@ void httpDomain::processPath (httpPath &ph, httpRequest &request, httpReply &rep
 		// Process the request
 		switch (request.getMethod ()) {
 			case httpMethod::GET:
-				cout << "GET ";
-				foundPath.getPathHandler ().methodGet (request, reply);
+				foundPath.getPathHandler ()->methodGet (request, reply);
 				break;
 			case httpMethod::POST:
-				cout << "POST ";
-				foundPath.getPathHandler ().methodPost (request, reply);
+				foundPath.getPathHandler ()->methodPost (request, reply);
 				break;
 			case httpMethod::OPTIONS:
-				cout << "OPTIONS ";
-				foundPath.getPathHandler ().methodOptions (request, reply);
+				foundPath.getPathHandler ()->methodOptions (request, reply);
 				break;
 			case httpMethod::PUT:
-				foundPath.getPathHandler ().methodPut (request, reply);
-				cout << "PUT ";
+				foundPath.getPathHandler ()->methodPut (request, reply);
 				break;
 			case httpMethod::DELETE:
-				cout << "DELETE ";
-				foundPath.getPathHandler ().methodDelete (request, reply);
+				foundPath.getPathHandler ()->methodDelete (request, reply);
 				break;
 			// case httpMethod::HEAD:
-			//	cout << "HEAD ";
-			// 	foundPath.getPathHandler ().methodHead (request, reply);
+			// 	foundPath.getPathHandler ()->methodHead (request, reply);
 			// 	break;
 			// case httpMethod::TRACE:
-			//	cout << "TRACE ";
-			// 	foundPath.getPathHandler ().methodTrace (request, reply);
+			// 	foundPath.getPathHandler ()->methodTrace (request, reply);
 			// 	break;
 			// case httpMethod::CONNECT:
-			//	cout << "CONNECT ";
-			// 	foundPath.getPathHandler ().methodConnect (request, reply);
+			// 	foundPath.getPathHandler ()->methodConnect (request, reply);
 			// 	break;
 			default:
-				cout << "INVALID ";
 				// wtf is that!?
 				reply.setHttpResponseCode (500);
 				reply.setHttpResponseMsg ("HTTP method not suported");

@@ -8,7 +8,7 @@ int main (int argc, char **argv) {
 	serverhttp shttp ("127.0.0.1", 5050);
 
 	filePathHandler fph ("/home/rafael/git/SerBe/websites/example.org/index.html");
-	httpPath ph ("/", fph);
+	httpPath ph ("/", &fph);
 	shttp.mainDomain.addPath (ph);
 	shttp.run ();
 

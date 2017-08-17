@@ -19,6 +19,7 @@
     "editor.formatOnSave": true,
     "C_Cpp.intelliSenseEngine": "Default",
     "files.associations": {
-        "*.ipp": "c"
+        "*.ipp": "c",
+        "stdexcept": "cpp"
     }
 }

@@ -17,6 +17,7 @@ class pathHandler {
 		this->methodGet (request, reply);
 	}
 	virtual void methodGet (httpRequest &request, httpReply &reply) {
+		cout << "hey" << endl;
 		(void)request;
 		(void)reply;
 	}

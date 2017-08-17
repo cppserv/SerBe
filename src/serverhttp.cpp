@@ -49,38 +49,46 @@ void serverhttp::process (unique_ptr<serbeSocket> &sock) {
 	switch (str2int (method.c_str ())) {
 		case str2int ("GET"):
 		case str2int ("get"):
+			cout << "GET ";
 			hmethod = httpMethod::GET;
 			break;
 		case str2int ("POST"):
 		case str2int ("post"):
+			cout << "POST ";
 			hmethod = httpMethod::POST;
 			break;
 		case str2int ("OPTIONS"):
 		case str2int ("options"):
+			cout << "OPTIONS ";
 			hmethod = httpMethod::OPTIONS;
 			break;
 		case str2int ("PUT"):
 		case str2int ("put"):
+			cout << "PUT ";
 			hmethod = httpMethod::PUT;
 			break;
 		case str2int ("DELETE"):
 		case str2int ("delete"):
+			cout << "DELETE ";
 			hmethod = httpMethod::DELETE;
 			break;
 		case str2int ("HEAD"):
 		case str2int ("head"):
+			cout << "HEAD ";
 			hmethod = httpMethod::HEAD;
 			break;
 		case str2int ("TRACE"):
 		case str2int ("trace"):
+			cout << "TRACE ";
 			hmethod = httpMethod::TRACE;
 			break;
 		case str2int ("CONNECT"):
 		case str2int ("connect"):
+			cout << "CONNECT ";
 			hmethod = httpMethod::CONNECT;
 			break;
 		default:
-			// Just break
+			cout << "INVALID REQUEST" << endl;
 			hmethod = httpMethod::INVALID;
 			return;
 	}
