@@ -14,6 +14,7 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-4.9
+            - libmagic-dev
       env: COMPILER=g++-4.9
     - compiler: gcc
       addons:
@@ -22,6 +23,7 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-5
+            - libmagic-dev
       env: COMPILER=g++-5
     - compiler: gcc
       addons:
@@ -30,6 +32,7 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-6
+            - libmagic-dev
       env: COMPILER=g++-6
 
 script:
