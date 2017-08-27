@@ -3,4 +3,4 @@
 	url = https://github.com/ralequi/hptimelib.git
 [submodule "dependencies/netlib"]
 	path = dependencies/netlib
-	url = git@github.com:cppserv/netlib.git
+	url = https://github.com/cppserv/netlib.git
