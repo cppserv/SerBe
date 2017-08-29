@@ -42,7 +42,13 @@
 # 	cd dependencies/repos/libressl; ./configure CFLAGS=$(LIBSSLCFLAGS)
 # 	cd dependencies/repos/libressl; $(MAKE) $(MFLAGS) install DESTDIR=$(CURRDIR)/dependencies/compiled/libressl
 
-all: $(wildcard src/*c src/*cpp include/*h include/*hpp) | build 
+all: compile run
+
+run: | compile
+	@echo starting plain-serbe using dummy-example.org
+	@./build/bin/serBe websites/example.org/
+
+compile: $(wildcard src/*c src/*cpp include/*h include/*hpp) | build 
 	cd build && cmake ..
 	cd build && ${MAKE} --no-print-directory
 
