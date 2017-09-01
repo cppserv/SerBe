@@ -1,6 +1,7 @@
 #include <chrono>
 #include <iomanip>
 #include <serverhttp.hpp>
+#include <uriQuery.hpp>
 
 serverhttp::serverhttp (string ip, uint16_t port) {
 	this->ip   = ip;
@@ -14,17 +15,36 @@ serverhttp::~serverhttp () {
 		this->th.join ();
 }
 
+static void auxiliarQueryRun (uriQuery *query) {
+	chrono::high_resolution_clock::time_point t1 = chrono::high_resolution_clock::now ();
+	query->processQuery ();
+	chrono::high_resolution_clock::time_point t2 = chrono::high_resolution_clock::now ();
+	auto duration = chrono::duration_cast<chrono::microseconds> (t2 - t1).count ();
+
+	cout << " (took: " << duration << " us)" << endl;
+
+	// delete itself
+	delete query;
+}
 void serverhttp::run () {
 	while (1) {
 		unique_ptr<serbeSocket> ss = unique_ptr<serbeSocket> (new serbeSocket (
 		    tcp_upgrade2syncSocket (tcp_accept (this->listenfd, NULL), NOSSL, NULL)));
 
-		chrono::high_resolution_clock::time_point t1 = chrono::high_resolution_clock::now ();
-		this->process (ss);
-		chrono::high_resolution_clock::time_point t2 = chrono::high_resolution_clock::now ();
-		auto duration = chrono::duration_cast<chrono::microseconds> (t2 - t1).count ();
+		uriQuery *query  = new uriQuery (this, ss);
+		thread processTh = thread (auxiliarQueryRun, query);
+		processTh.detach ();
 
-		cout << " (took: " << duration << " us)" << endl;
+		/*
+		        chrono::high_resolution_clock::time_point t1 = chrono::high_resolution_clock::now
+		   ();
+		        this->process (ss);
+		        chrono::high_resolution_clock::time_point t2 = chrono::high_resolution_clock::now
+		   ();
+		        auto duration = chrono::duration_cast<chrono::microseconds> (t2 - t1).count ();
+
+		        cout << " (took: " << duration << " us)" << endl;
+		        */
 	}
 }
 

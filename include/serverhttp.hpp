@@ -9,6 +9,8 @@
 #include <serbeSocket.hpp>
 
 class serverhttp {
+	friend class uriQuery;
+
    public:
 	serverhttp (string ip, uint16_t port);
 	~serverhttp ();
