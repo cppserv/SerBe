@@ -45,5 +45,5 @@ void filePathHandler::methodGet (httpRequest &request, httpReply &reply) {
 	reply.addHeader (this->contentLength);
 	reply.addHeader (this->mimetype);
 	// reply.addHeader (extraHeader);
-	reply.addContent (this->fileMap, this->fileSize);
+	reply.setContent (this->fileMap, this->fileSize);
 }

@@ -20,6 +20,17 @@
     "C_Cpp.intelliSenseEngine": "Default",
     "files.associations": {
         "*.ipp": "c",
-        "stdexcept": "cpp"
+        "stdexcept": "cpp",
+        "cctype": "cpp",
+        "cmath": "cpp",
+        "csignal": "cpp",
+        "cstdarg": "cpp",
+        "cstddef": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp",
+        "cwchar": "cpp",
+        "cwctype": "cpp"
     }
 }

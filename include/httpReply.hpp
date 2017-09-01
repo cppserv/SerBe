@@ -10,9 +10,12 @@ class httpReply {
 	httpReply (unique_ptr<serbeSocket> sock, string version);
 	~httpReply ();
 
-	void addHeader (string &headers);
-	void addContent (string &content);
+	void addHeader (const string &headers);
+	void addContent (const string &content);
 	void addContent (const char *content, unsigned long size);
+	// By setting this, if no added is performed, the same imput char would be directly sent without
+	// copies.
+	void setContent (const char *content, unsigned long size);
 
 	// inline methods
 
@@ -30,6 +33,12 @@ class httpReply {
 		this->httpResponseMsg = httpResponseMsg;
 	}
 
+	// operators
+	httpReply &operator<< (const string &str) {
+		this->addContent (str);
+		return *this;
+	}
+
    protected:
    private:
 	unique_ptr<serbeSocket> sock;
@@ -38,6 +47,11 @@ class httpReply {
 	string httpResponseMsg;
 	ostringstream headers;
 	ostringstream content;
+
+	// const content
+	const char *constContent;
+	unsigned long constContentLenght;
+	bool constContentSet = false;
 };
 
 #endif

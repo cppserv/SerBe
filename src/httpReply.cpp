@@ -13,20 +13,32 @@ httpReply::httpReply (unique_ptr<serbeSocket> sock, string version) {
 	httpResponseMsg  = "OK";
 }
 
-void httpReply::addHeader (string& header) {
+void httpReply::addHeader (const string& header) {
 	if (!header.empty ())
 		this->headers << header << "\r\n";
 }
-void httpReply::addContent (string& content) {
+void httpReply::addContent (const string& content) {
+	if (constContentSet) {
+		this->content.write (this->constContent, this->constContentLenght);
+		constContentSet = false;
+	}
 	this->content << content;
 }
 void httpReply::addContent (const char* content, unsigned long size) {
+	if (constContentSet) {
+		this->content.write (this->constContent, this->constContentLenght);
+		constContentSet = false;
+	}
 	this->content.write (content, size);
+}
+void httpReply::setContent (const char* content, unsigned long size) {
+	this->constContentSet    = true;
+	this->constContent       = content;
+	this->constContentLenght = size;
 }
 
 httpReply::~httpReply () {
 	string headers   = this->headers.str ();
-	string content   = this->content.str ();
 	string separator = "\r\n";
 
 	string httpIntro =
@@ -38,7 +50,10 @@ httpReply::~httpReply () {
 	sock->send (headers.c_str (), headers.length ());
 	if (headers.length ())  // only add one more separator if there are some content
 		sock->send (separator.c_str (), separator.length ());
-	sock->send (content.c_str (), content.length ());
-	// if (content.length ())  // only add one more separator if there are some content
-	//	sock->send (separator.c_str (), separator.length ());
+	if (constContentSet) {
+		sock->send (this->constContent, this->constContentLenght);
+	} else {
+		string content = this->content.str ();
+		sock->send (content.c_str (), content.length ());
+	}
 }
