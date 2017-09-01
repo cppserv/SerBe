@@ -29,7 +29,7 @@ class httpReply {
 	inline void setHttpResponseCode (int httpResponseCode) {
 		this->httpResponseCode = httpResponseCode;
 	}
-	inline void setHttpResponseMsg (string httpResponseMsg) {
+	inline void setHttpResponseMsg (string &httpResponseMsg) {
 		this->httpResponseMsg = httpResponseMsg;
 	}
 
