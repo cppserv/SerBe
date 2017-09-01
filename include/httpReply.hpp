@@ -29,15 +29,12 @@ class httpReply {
 	inline void setHttpResponseCode (int httpResponseCode) {
 		this->httpResponseCode = httpResponseCode;
 	}
-	inline void setHttpResponseMsg (string &httpResponseMsg) {
+	inline void setHttpResponseMsg (string httpResponseMsg) {
 		this->httpResponseMsg = httpResponseMsg;
 	}
 
 	// operators
-	httpReply &operator<< (const string &str) {
-		this->addContent (str);
-		return *this;
-	}
+	httpReply &operator<< (const string &str);
 
    protected:
    private:

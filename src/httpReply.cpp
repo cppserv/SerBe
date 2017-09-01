@@ -57,3 +57,9 @@ httpReply::~httpReply () {
 		sock->send (content.c_str (), content.length ());
 	}
 }
+
+/* Operators */
+httpReply& httpReply::operator<< (const string& str) {
+	this->addContent (str);
+	return *this;
+}
